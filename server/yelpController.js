@@ -101,8 +101,13 @@ const yelpController = {
 
         if (res.locals.coordsGeoType === 'Polygon') {
           coords = turf.polygon(res.locals.coords);
+          console.log('its a polygon');
         } else {
           coords = turf.polygon(res.locals.coords[0]);
+          console.log('its a multi');
+          console.log(res.locals.coords[0]);
+          console.log(res.locals.coords[1]);
+          console.log(res.locals.coords.length);
         }
 
         let pointsWithin = turf.pointsWithinPolygon(yelpPoints, coords);
@@ -116,7 +121,7 @@ const yelpController = {
         });
         const filteredYelpData = [];
         yelpData.forEach(el => {
-          console.log('📍 yelpData latlong: ' + el.coordinates.lat + ', ' + el.coordinates.lng);
+          //console.log('📍 yelpData latlong: ' + el.coordinates.lat + ', ' + el.coordinates.lng);
           pointsWithin.features.forEach(le => {
             if ((el.coordinates.lat === le.geometry.coordinates[0]) && (el.coordinates.lng === le.geometry.coordinates[1])) {
               filteredYelpData.push(el);
