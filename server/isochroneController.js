@@ -166,6 +166,18 @@ isochroneController.generateIsochrones = (req, res, next) => {
           })
         );
       }
+      let multiCoordinates = [];
+      for (let i = 0; i < res.locals.isoIntersectionPoints.length;i++){
+        let latitudeIso = 0;
+        let longitudeIso = 0;
+        for (let j = 0; j < res.locals.isoIntersectionPoints[i].length;j++){
+          latitudeIso +=res.locals.isoIntersectionPoints[i][j].lat/res.locals.isoIntersectionPoints[i].length;
+          longitudeIso +=res.locals.isoIntersectionPoints[i][j].lng/res.locals.isoIntersectionPoints[i].length;
+        }
+      multiCoordinates.push({lat: latitudeIso,lng:longitudeIso});       
+      }
+      res.locals.multicoordinates = multiCoordinates;
+      console.log('multicoordinates', res.locals.multicoordinates);
     }
     //debugger;
     next();

@@ -105,9 +105,7 @@ const yelpController = {
         } else {
           coords = turf.polygon(res.locals.coords[0]);
           console.log('its a multi');
-          console.log(res.locals.coords[0]);
-          console.log(res.locals.coords[1]);
-          console.log(res.locals.coords.length);
+
         }
 
         let pointsWithin = turf.pointsWithinPolygon(yelpPoints, coords);
